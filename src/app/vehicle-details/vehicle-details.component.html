@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="formDiv">
                             <!-- <form #regForm=ngForm (submit)="registerUser()"> -->
-                            <form #regForm=ngForm (ngSubmit)="regForm.valid && submitted()">
+                            <form #regForm=ngForm (ngSubmit)="regForm.valid && !existsVehicle(vehicle.vehicleRegistrationno)">
                                 <!-- {{regForm.value|json}} -->
                                 <!-- label for takes the id -->
                                 <!-- {{reg|json}} -->
@@ -28,16 +28,16 @@
                                 </ng-select><br> -->
 
 
-                                
+                               
                                 <!-- Vehicle Type -->
-                                <div *ngIf="regForm.submitted && type.invalid && checkType()" style="color:red;">
+                                <div *ngIf="regForm.submitted && type.invalid" style="color:red;">
                                     <div *ngIf="type.errors?.required"> Please select Vehicle type</div>
                                 </div>
                                 <label for="vehicleTypeDetail">Vehicle Type</label>
                                 <select class="custom-select" name="vehicleTypeDetail" id="vehicleTypeDetail"
                                     [(ngModel)]="vehicle.vehicleType" #type="ngModel"
-                                    [ngClass]="{ 'is-invalid': regForm.submitted &&  type.invalid }" required>
-                                    <option value=0 class="text-primary font-weight-bolder" class="select-items">
+                                    [ngClass]="{ 'is-invalid': regForm.submitted &&  type.untouched }" required>
+                                    <option disabled value=0 class="text-primary font-weight-bolder" class="select-items">
                                         --- Select Vehicle Type ---
                                     </option>
                                     <option *ngFor="let v of vehicleDetail" [value]=v.id>
@@ -55,7 +55,7 @@
                                 <select class="custom-select" name="vehicleManufactureDetail" id="vehicleManufactureDetail"
                                     [(ngModel)]="vehicle.vehicleManufacture" #manufacturer="ngModel"
                                     [ngClass]="{ 'is-invalid': regForm.submitted && manufacturer.invalid }" required>
-                                    <option value="" class="text-primary font-weight-bolder" class="select-items">
+                                    <option disabled value="" class="text-primary font-weight-bolder" class="select-items">
                                         --- ManuFacturer ---
                                     </option>
                                     <ng-container *ngFor="let v of vehicleDetail">
@@ -75,7 +75,7 @@
                                 <select class="custom-select" name="vehicleModelDetail" id="vehicleModelDetail"
                                     [(ngModel)]="vehicle.vehicleModel" #model="ngModel"
                                     [ngClass]="{ 'is-invalid': regForm.submitted && model.invalid }" required>
-                                    <option value="" class="text-primary font-weight-bolder" class="select-items">
+                                    <option disabled value="" class="text-primary font-weight-bolder" class="select-items">
                                         --- Models ---
                                     </option>
                                     <ng-container *ngFor="let m of cList">
@@ -134,6 +134,9 @@
 
 
                                 <button type="submit" class="btn btn-primary" (submit)="submitted()">Register</button>
+                                <div class="error-Message" style="color: red;display: inline;float: right;" align="center">
+                                    {{message}}
+                                </div>
                             </form>
                             {{vehicle.vehicleType}}
                             {{regForm.valid}}

@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgOption } from '@ng-select/ng-select';
 import { Vehicle } from '../Models/vehicle';
+import { VehicleService } from '../Services/vehicle.service';
 
 type VehicleDetails = {
   id: number;
@@ -17,8 +18,11 @@ type CarList = {
 }
 
 
+
+
 type vehicleDetails = VehicleDetails[];
 type carList = CarList[];
+
 
 @Component({
   selector: 'app-vehicle-details',
@@ -51,25 +55,28 @@ export class VehicleDetailsComponent implements OnInit {
 
   rForm: NgForm;
   vehicleDetail: vehicleDetails = [];
+ 
   vehicle: Vehicle = new Vehicle();
   cList: carList = [];
-  constructor(private router:Router) {
+  message:string = "";
+  returnedValue:boolean;
+  constructor(private vehicleService:VehicleService, private router:Router) {
     this.vehicle.vehicleType = 0;
     this.vehicle.vehicleManufacture = "";
     this.vehicle.vehicleModel = "";
+    
+
     this.vehicleDetail = [
       { id: 1, name: "Car", category: ["Maruti", "Honda"] },
       { id: 2, name: "Bike", category: ["Bajaj", "Royal Enfield"] },
     ];
     this.cList = [
       { manufacturer: "Maruti", models: ["Baleno", "Ertiga", "Swift Dzire"] },
-      { manufacturer: "Honda", models: ["Honda amaze", "Honda City", "Honda Jazz"] },
+      { manufacturer: "Honda", models: ["Honda Amaze", "Honda City", "Honda Jazz"] },
       { manufacturer: "Bajaj", models: ["Discover", "Platina", "Pulsar"] },
       { manufacturer: "Royal Enfield", models: ["classic", "Platinum"] },
-      
-
     ];
-
+    
     // this.reg.userName = "chirag";
     // this.reg.userPassword = "Chirag@12";
     // this.reg.userEmail = "chirag@lti.com";
@@ -89,10 +96,23 @@ export class VehicleDetailsComponent implements OnInit {
     this.router.navigate(['/selectPlan']);
   }
 
-  checkType():boolean{
-    console.log(this.vehicle.vehicleType);
-    return true;
+  existsVehicle(registerNo:string):boolean{
+    this.vehicleService.getVehicleByRegistrationNumber(registerNo).subscribe(data =>{
+      console.log(data);
+      console.log("hello");
+      if(!data){
+        this.submitted();
+      }
+      this.returnedValue = data;
+      this.message="vehicle already exists";
+      
+      },
+      error=>{console.log(error.error.text);
+      console.log(error.error);
+      });
+      
+      return false;
   }
 
-
+  
 }

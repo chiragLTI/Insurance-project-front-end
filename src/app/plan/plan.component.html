@@ -8,9 +8,7 @@
                     </div>
                     <div class="card-body">
 
-                        <div class="error-Message" style="color: red;">
-                            {{existingVehicleMessage}}
-                        </div>
+                        
                         <form name="form" (ngSubmit)="form.valid && onSubmit() " #form="ngForm">
                             <div class="form-group">
                                 <label for="product">Plan type</label>
@@ -35,7 +33,7 @@
                                 <label for="year">No of years</label>
                                 <!-- DropDownList -->
                                 <select class="custom-select" name="year" [(ngModel)]="vehicleDetails.vehicleDurationofpolicy" #year="ngModel"
-                                    #em1="ngModel" [ngClass]="{ 'is-invalid': form.submitted}" required>
+                                    #em1="ngModel" [ngClass]="{ 'is-invalid': form.submitted && year.valid}" (change)="calculatePremium()" required>
                                     <option value="" class="text-primary font-weight-bolder">
                                         --- Select Duration ---
                                     </option>
@@ -49,6 +47,9 @@
                                     <div *ngIf="em1.errors?.required"> Please select no of years</div>
                                 </div>
                             </div>
+
+                            <label for="payment" style="color: green;font-weight: bold;">Premium Amount</label>
+                            <input type="number" name="payment" [(ngModel)]="payment" readonly><br><br>
 
                             <button class="btn btn-primary">Submit</button>
                         </form>

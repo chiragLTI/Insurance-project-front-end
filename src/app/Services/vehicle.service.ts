@@ -14,4 +14,9 @@ export class VehicleService {
   insertVehicleService(vehicle:Vehicle):Observable<Vehicle[]>{
     return this.myhttp.post<Vehicle[]>(this.baseURL+"addVehicle/",vehicle);
   }
+
+  getVehicleByRegistrationNumber(registerNo:string):Observable<boolean>{
+    return this.myhttp.get<boolean>(this.baseURL+"getRegisteredVehicle/"+registerNo);
+  }
+
 }
