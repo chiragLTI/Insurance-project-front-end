@@ -1,0 +1,61 @@
+<div class="first">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Plans</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="error-Message" style="color: red;">
+                            {{existingVehicleMessage}}
+                        </div>
+                        <form name="form" (ngSubmit)="form.valid && onSubmit() " #form="ngForm">
+                            <div class="form-group">
+                                <label for="product">Plan type</label>
+                                <!-- DropDownList -->
+                                <select class="custom-select" name="product" [(ngModel)]="vehicleDetails.vehiclePlantype"
+                                    #product="ngModel" #em="ngModel"
+                                    [ngClass]="{ 'is-invalid': form.submitted && product.invalid }" required>
+                                    <option value="" class="text-primary font-weight-bolder">
+                                        --- Select Plan Type ---
+                                    </option>
+                                    <option *ngFor="let product of products" [value]=product.id>
+                                        {{product.name}}
+                                    </option>
+                                </select>
+
+                                <!-- Required Validation Message -->
+                                <div *ngIf="form.submitted && product.invalid" class="text-danger">
+                                    <div *ngIf="em.errors?.required"> Please select plan type</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="year">No of years</label>
+                                <!-- DropDownList -->
+                                <select class="custom-select" name="year" [(ngModel)]="vehicleDetails.vehicleDurationofpolicy" #year="ngModel"
+                                    #em1="ngModel" [ngClass]="{ 'is-invalid': form.submitted}" required>
+                                    <option value="" class="text-primary font-weight-bolder">
+                                        --- Select Duration ---
+                                    </option>
+                                    <option *ngFor="let year of years" [value]="year.name">
+                                        {{year.name}}
+                                    </option>
+                                </select>
+
+                                <!-- Required Validation Message -->
+                                <div *ngIf="form.submitted && year.invalid" class="text-danger">
+                                    <div *ngIf="em1.errors?.required"> Please select no of years</div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
