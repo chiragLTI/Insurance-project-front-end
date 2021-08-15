@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Vehicle } from '../Models/vehicle';
 import { VehicleService } from '../Services/vehicle.service';
 
@@ -54,8 +55,16 @@ export class PlanComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.vehicleDetails = JSON.parse(sessionStorage.getItem("vehicle"))
+    if(sessionStorage.getItem("vehicle") != null){
+    this.vehicleDetails = JSON.parse(sessionStorage.getItem("vehicle"));
+    console.log("Inside Plan component, OnInit --> from vehicle registration page");
+    }
+    else if(sessionStorage.getItem("renew") != null){
+      this.vehicleDetails = JSON.parse(sessionStorage.getItem("renewVehicleDetails"));
+      console.log("Inside Plan component, OnInit --> from vehicle insurance renew page");
+    }
     console.log(this.vehicleDetails);
+
   }
 
 
@@ -75,15 +84,21 @@ export class PlanComponent implements OnInit {
     this.vehicleDetails.vehiclePlantype = Number(this.vehicleDetails.vehiclePlantype);
     this.vehicleDetails.vehicleType = Number(this.vehicleDetails.vehicleType);
     console.log(this.vehicleDetails);
-    this.saveVehicle();
+    //this.saveVehicle();
 
   }
   calculatePremium(): void {
+    console.log("inside calculate premium");
     for (let i = 0; i < this.vehicleCC.length; i++) {
-      if (this.vehicleCC[i].model == this.vehicleDetails.vehicleModel) {
+      console.log(this.vehicleDetails.vehicleModel);
+      if (this.vehicleCC[i].model === this.vehicleDetails.vehicleModel) {
         if (this.vehicleDetails.vehiclePlantype == 0) {
           this.payment = this.calculatePremiumForThirdParty(this.vehicleCC[i].modelCC);
         }
+        else if(this.vehicleDetails.vehiclePlantype == 1){
+          this.payment = 1455;
+        }
+        break;
       }
     }
     this.payment=this.payment*Number(this.vehicleDetails.vehicleDurationofpolicy);

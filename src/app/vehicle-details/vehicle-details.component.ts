@@ -84,6 +84,7 @@ export class VehicleDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(sessionStorage.getItem("customerId"));
   }
 
   onChange(event: any) {
@@ -92,6 +93,9 @@ export class VehicleDetailsComponent implements OnInit {
 
 
   submitted(): void {
+    if(sessionStorage.getItem("renew")!=null){
+      sessionStorage.removeItem("renew");
+    }
     sessionStorage.setItem("vehicle", JSON.stringify(this.vehicle));
     this.router.navigate(['/selectPlan']);
   }

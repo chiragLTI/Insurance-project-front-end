@@ -1,0 +1,32 @@
+<div class="first">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Login Details</h4>
+                    </div>
+                    <form name="form" (ngSubmit)="checkCredentials()" #form="ngForm">
+                        <div class="container">
+                          <label for="uname"><b>Email</b></label>
+                          <input type="text" placeholder="Enter Username" name="uname" [(ngModel)]="useremail" required>
+                      
+                          <label for="psw"><b>Password</b></label>
+                          <input type="password" placeholder="Enter Password" name="psw" [(ngModel)]="userpass" required>
+                      
+                          <button type="submit" class="btn btn-primary" (submit)="checkCredentials()">Login</button>
+                          <br>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </div>
+                      
+                        <div class="container" style="background-color:#f1f1f1">
+                          <button type="button" class="btn btn-danger">Cancel</button>
+                          <span class="psw" style="float: right;">Forgot <a href="#">password?</a></span>
+                        </div>
+                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

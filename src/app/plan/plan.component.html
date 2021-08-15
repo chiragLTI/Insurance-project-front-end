@@ -16,7 +16,7 @@
                                 <select class="custom-select" name="product" [(ngModel)]="vehicleDetails.vehiclePlantype"
                                     #product="ngModel" #em="ngModel"
                                     [ngClass]="{ 'is-invalid': form.submitted && product.invalid }" required>
-                                    <option value="" class="text-primary font-weight-bolder">
+                                    <option disabled value="" class="text-primary font-weight-bolder">
                                         --- Select Plan Type ---
                                     </option>
                                     <option *ngFor="let product of products" [value]=product.id>
@@ -34,7 +34,7 @@
                                 <!-- DropDownList -->
                                 <select class="custom-select" name="year" [(ngModel)]="vehicleDetails.vehicleDurationofpolicy" #year="ngModel"
                                     #em1="ngModel" [ngClass]="{ 'is-invalid': form.submitted && year.valid}" (change)="calculatePremium()" required>
-                                    <option value="" class="text-primary font-weight-bolder">
+                                    <option disabled value="" class="text-primary font-weight-bolder">
                                         --- Select Duration ---
                                     </option>
                                     <option *ngFor="let year of years" [value]="year.name">

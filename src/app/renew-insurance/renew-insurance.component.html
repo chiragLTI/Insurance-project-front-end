@@ -1,0 +1,23 @@
+<div class="first">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+<div class="container">
+<form #fetchInsuranceForm=ngForm (ngSubmit)="showInsurances()">
+    <label for="type">Choose type:</label>
+    <select name="type" id="type"  [(ngModel)]="typeOfInsurance" required>
+        <option disabled value="">Choose Options</option>
+        <option value=1>Vehicle</option>
+        <option value=2>Travel</option>
+    </select>
+    <br><br>
+    <button class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="main">
+    <router-outlet></router-outlet>
+</div>
