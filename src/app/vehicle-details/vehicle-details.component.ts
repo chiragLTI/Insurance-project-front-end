@@ -67,14 +67,20 @@ export class VehicleDetailsComponent implements OnInit {
     
 
     this.vehicleDetail = [
-      { id: 1, name: "Car", category: ["Maruti", "Honda"] },
-      { id: 2, name: "Bike", category: ["Bajaj", "Royal Enfield"] },
+      { id: 1, name: "Car", category: ["Maruti", "Honda","Hyundai","TATA","Renault"] },
+      { id: 2, name: "Bike", category: ["Bajaj", "Royal Enfield","Yamaha","Hero"] },
     ];
     this.cList = [
       { manufacturer: "Maruti", models: ["Baleno", "Ertiga", "Swift Dzire"] },
       { manufacturer: "Honda", models: ["Honda Amaze", "Honda City", "Honda Jazz"] },
+      { manufacturer: "Hyundai", models: ["i10", "i20"] },
+      { manufacturer: "TATA", models: ["Nano", "Tiago"] },
+      { manufacturer: "Renault", models: ["Climber", "Duster"] },
+
       { manufacturer: "Bajaj", models: ["Discover", "Platina", "Pulsar"] },
-      { manufacturer: "Royal Enfield", models: ["classic", "Platinum"] },
+      { manufacturer: "Royal Enfield", models: ["Classic", "Platinum"] },
+      { manufacturer: "Yamaha", models: ["FZ-X"] },
+      { manufacturer: "Hero", models: ["Splendor"] }
     ];
     
     // this.reg.userName = "chirag";
@@ -97,6 +103,7 @@ export class VehicleDetailsComponent implements OnInit {
       sessionStorage.removeItem("renew");
     }
     sessionStorage.setItem("vehicle", JSON.stringify(this.vehicle));
+    sessionStorage.setItem("policyType","1");
     this.router.navigate(['/selectPlan']);
   }
 

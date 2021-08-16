@@ -1,32 +1,57 @@
 <div class="first">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Login Details</h4>
+    <div class="row justify-content-center">
+                        <div class="col-md-5">
+                            <div class="card">
+                                <div class="card-header"><h4>Member Login</h4></div>
+                                <h5>{{msg}}</h5>
+                                <div class="card-body">
+    
+                                    <form #logForm=ngForm class="form-horizontal" (ngSubmit)="onSubmit(logForm)" method="post" action="#">
+    
+                                        <div class="form-group">
+                                            <label for="name" class="cols-sm-2 control-label">Email</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                                    <input type="email" class="form-control" name="email" id="email" #em="ngModel" placeholder="Enter email" required
+                                                    pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$"
+                                                    [(ngModel)]="log.custEmail"><br><br>
+                                                    <div *ngIf="em.invalid && (em.dirty||em.touched)" style="color:red;"  >
+                                                     <div *ngIf="em.errors?.required">Email is required</div>
+                                                     <div *ngIf="em.errors?.pattern">enter proper email</div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email" class="cols-sm-2 control-label">Password</label>
+                                            <div class="cols-sm-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                                    <input type="password" class="form-control" name="upass" id="upass" #up="ngModel" placeholder="Enter password" required
+                                                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                                    [(ngModel)]="log.custPassword"><br><br>
+                                                    <div *ngIf="up.invalid && (up.dirty||up.touched)" style="color:red;"  >
+                                                     <div *ngIf="up.errors?.required">password is required</div>
+                                                     <div *ngIf="up.errors?.pattern">Password shoild contain [min 8 char,1uppercase,1lowercase,1 special symbol]</div>
+                                                   </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group ">
+                                            <button type="button" (click)="onSubmit(logForm)"
+                                             class="btn btn-primary btn-lg btn-block login-button">Login</button>
+                                        </div>
+                                        <div class="login-register">
+                                            <a [routerLink]="['/forgotpassword']" >Forgot password</a>
+                                        </div>
+                                    </form>
+                                </div>
+    
+                            </div>
+                        </div>
                     </div>
-                    <form name="form" (ngSubmit)="checkCredentials()" #form="ngForm">
-                        <div class="container">
-                          <label for="uname"><b>Email</b></label>
-                          <input type="text" placeholder="Enter Username" name="uname" [(ngModel)]="useremail" required>
-                      
-                          <label for="psw"><b>Password</b></label>
-                          <input type="password" placeholder="Enter Password" name="psw" [(ngModel)]="userpass" required>
-                      
-                          <button type="submit" class="btn btn-primary" (submit)="checkCredentials()">Login</button>
-                          <br>
-                            <input type="checkbox" checked="checked" name="remember"> Remember me
-                        </div>
-                      
-                        <div class="container" style="background-color:#f1f1f1">
-                          <button type="button" class="btn btn-danger">Cancel</button>
-                          <span class="psw" style="float: right;">Forgot <a href="#">password?</a></span>
-                        </div>
-                     </form>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
-
+    </div>

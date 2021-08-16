@@ -19,4 +19,9 @@ export class VehicleService {
     return this.myhttp.get<boolean>(this.baseURL+"getRegisteredVehicle/"+registerNo);
   }
 
+  updateVehicleService(vehicle:Vehicle):Observable<any>{
+    console.log("update service ANgular");
+    return this.myhttp.put<any>(this.baseURL+"updateVehicle/",vehicle);
+  }
+
 }

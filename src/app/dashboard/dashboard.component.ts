@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  // accessingPageId: number;
   public user: {id: number};
   constructor(private router:Router) { 
     

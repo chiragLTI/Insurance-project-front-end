@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Insurance';
+
+  sessionEnabled():boolean{
+    if(sessionStorage.getItem("setNav")!=null){
+      return true;
+    }
+    return false;
+  }
 }

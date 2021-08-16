@@ -16,6 +16,7 @@ export class RenewVehicleComponent implements OnInit {
   customerId: number;
   buttonIdOnInsuranceRenew: number;
   vehicleInsuranceRenew: Vehicle = new Vehicle();
+  passInsurance:Insurance = new Insurance();
 
   constructor(private insuranceService: InsuranceService, private router: Router) { }
 
@@ -27,13 +28,13 @@ export class RenewVehicleComponent implements OnInit {
   loadAllVehicleInsurances() {
 
     this.customerId = Number(sessionStorage.getItem("customerId"));
-    this.insuranceService.findAllVehicleInsuranceService(this.customerId).subscribe(
+    this.insuranceService.findAllInsuranceService(this.customerId).subscribe(
       (data: Insurance[]) => {
         this.allVehicleInsurances = data;
         console.log(this.allVehicleInsurances);
         for (let index = 0; index < this.allVehicleInsurances.length; index++) {
           if (this.allVehicleInsurances[index]['vehicle'] != null) {
-            this.allVehicleList[index] = this.allVehicleInsurances[index]['vehicle'];
+            this.allVehicleList.push(this.allVehicleInsurances[index]['vehicle']);
           }
         }
         console.log(this.allVehicleList);
@@ -48,6 +49,18 @@ export class RenewVehicleComponent implements OnInit {
 
   passVehicleDetailsToPlan(event: any): void {
     this.buttonIdOnInsuranceRenew = Number(event.target.attributes.id.value);
+    for (let i = 0; i < this.allVehicleInsurances.length; i++) {
+      if(this.buttonIdOnInsuranceRenew == this.allVehicleInsurances[i]['insuranceId']){
+        this.passInsurance.customer ={custId: sessionStorage.getItem("customerId")};
+        this.passInsurance.insuranceAmount = 0;
+        this.passInsurance.insuranceIsactive = 1;
+        this.passInsurance.insuranceIssuedate = new Date();
+        this.passInsurance.insurancePolicytype = 1;
+      }
+      
+    }
+    sessionStorage.setItem("renewInsuranceDetails",JSON.stringify(this.passInsurance));
+
     for (let index = 0; index < this.allVehicleList.length; index++) {
       if (this.allVehicleList[index]['insurance'] == this.buttonIdOnInsuranceRenew) {
         this.vehicleInsuranceRenew = this.allVehicleList[index];

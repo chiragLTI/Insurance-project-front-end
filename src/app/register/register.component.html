@@ -1,0 +1,130 @@
+<div class="first">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Customer Registeration</h4>
+                        <h5>{{final_msg1}}</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <form #regForm=ngForm (ngSubmit)="onSubmit()"  class="form-horizontal">
+
+                            <div class="form-group">
+                                <label for="fname" class="cols-sm-2 control-label">First Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa"
+                                                aria-hidden="true"></i></span>
+                                        <div *ngIf="un.invalid && (un.dirty||un.touched)" style="color:red;">
+                                            <div *ngIf="un.errors?.required">First Name required</div>
+                                            <div *ngIf="un.errors?.minlength">Minimum 4 chars</div>
+                                        </div>
+
+                                        <input type="text" class="form-control" name="custFirstname" id="name"
+                                            placeholder="Enter your Name" required minlength="4" #un="ngModel"
+                                            placeholder="Enter user name" id="uname" required
+                                            [(ngModel)]="customer.custFirstname" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            
+                            <div class="form-group">
+                                <label for="lname" class="cols-sm-2 control-label">Last Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa"
+                                                aria-hidden="true"></i></span>
+                                        <div *ngIf="ln.invalid && (ln.dirty||ln.touched)" style="color:red;">
+                                            <div *ngIf="ln.errors?.required">Last required</div>
+                                            <div *ngIf="ln.errors?.minlength">Minimum 4 chars</div>
+                                        </div>
+
+                                        <input type="text" class="form-control" name="custLastname" id="name"
+                                            placeholder="Enter your Name" required minlength="4" #ln="ngModel"
+                                            placeholder="Enter user name" id="uname" required
+                                            [(ngModel)]="customer.custLastname" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="mobile" class="cols-sm-2 control-label">Mobile No</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa"
+                                                aria-hidden="true"></i></span>
+                                        <div *ngIf="mb.invalid && (mb.dirty||mb.touched)" style="color:red;">
+                                            <div *ngIf="mb.errors?.required">Mobile no required</div>
+  
+                                        </div>
+
+                                        <input type="text" class="form-control" name="custContactnumber" id="name"
+                                            placeholder="Enter your Name" required minlength="4" #mb="ngModel"
+                                            placeholder="Enter user name" id="uname" required
+                                            [(ngModel)]="customer.custContactnumber" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+                            <div class="form-group">
+                                <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope fa"
+                                                aria-hidden="true"></i></span>
+                                        <input type="email" class="form-control" name="custEmail" id="email" #em="ngModel"
+                                            placeholder="Enter email" required
+                                            pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$"
+                                            [(ngModel)]="customer.custEmail"><br><br>
+                                        <div *ngIf="em.invalid && (em.dirty||em.touched)" style="color:red;">
+                                            <div *ngIf="em.errors?.required">Email is required</div>
+                                            <div *ngIf="em.errors?.pattern">enter proper email</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password" class="cols-sm-2 control-label">Password</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg"
+                                                aria-hidden="true"></i></span>
+                                                <input type="password" class="form-control" name="custPassword" id="upass" #up="ngModel" placeholder="Enter password" required
+                                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                                [(ngModel)]="customer.custPassword"><br><br>
+                                                <div *ngIf="up.invalid && (up.dirty||up.touched)" style="color:red;"  >
+                                                 <div *ngIf="up.errors?.required">password is required</div>
+                                                 <div *ngIf="up.errors?.pattern">Password shoild contain [min 8 char,1uppercase,1lowercase,1 special symbol]</div>
+                                               </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="form-group ">
+                                <button type="button"  (click)="onSubmit()"
+                                    class="btn btn-primary btn-lg btn-block login-button"   >Register</button>
+                            </div>
+                            <div class="login-register">
+                                <a href="index.php">Login</a>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

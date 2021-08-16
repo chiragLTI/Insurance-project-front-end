@@ -13,4 +13,11 @@
 
 <!-- <app-dashboard></app-dashboard> -->
 
+<ng-container *ngIf="!sessionEnabled()">
+    <app-navbar></app-navbar>
+</ng-container>
+<ng-container *ngIf="sessionEnabled()">
+    <app-navbar-on-login></app-navbar-on-login>
+</ng-container>
+
 <router-outlet></router-outlet>

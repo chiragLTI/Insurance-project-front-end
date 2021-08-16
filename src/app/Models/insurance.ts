@@ -1,6 +1,6 @@
 export class Insurance{
 
-    custId:number;
+    customer:any={custId:0};
     insuranceId:number;
 	insuranceAmount:number;
 	insuranceIsactive:number;

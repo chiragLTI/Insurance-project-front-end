@@ -1,1 +1,41 @@
-<p>renew-travel works!</p>
+<div>
+    <div class="tableAlign">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <table class="table" border="1px">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Insurance Id</th>
+                                <th scope="col">Travel Id</th>
+                                <th scope="col">Destination</th>
+                                <th scope="col">Travel Mode</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Members</th>
+                                <th scope="col">Policy Plan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let insurance of allTravelInsurances;">
+                                <ng-container *ngIf="insurance.insurancePolicytype === 2">
+                                    <td>{{insurance.insuranceId}}</td>
+                                    <ng-container *ngFor="let t of allTravelList;">
+                                        <ng-container *ngIf="t != null && t.insurance === insurance.insuranceId ">
+                                            <td>{{t.travelid}}</td>
+                                            <td>{{t.travelDestination}}</td>
+                                            <td>{{t.travelModeoftravel}}</td>
+                                            <td>{{t.travelStartdate}}</td>
+                                            <td>{{t.travelEnddate}}</td>
+                                            <td>{{t.travelNoofmembers}}</td>
+                                            <td>{{t.travelPolicyplan}}</td>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -9,6 +9,6 @@ export class Vehicle {
 	vehiclePurchasedate:Date;
 	vehicleRegistrationno:string;
     vehicleType:number;
-    customer:any={custId:106};
-	insurance:any={insuranceId:313};
+    customer:any={custId:0};
+	insurance:any={insuranceId:0};
 }

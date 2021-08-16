@@ -36,7 +36,7 @@ export class PlanComponent implements OnInit {
   ];
   vehicleCC: vehicleCCList = [];
   payment: number = 0;
-  constructor(private vehicleService: VehicleService) {
+  constructor(private vehicleService: VehicleService, private routes:Router) {
     this.vehicleCC = [
       { model: "Baleno", modelCC: 1000 },
       { model: "Ertiga", modelCC: 1200 },
@@ -44,11 +44,20 @@ export class PlanComponent implements OnInit {
       { model: "Honda Amaze", modelCC: 1400 },
       { model: "Honda City", modelCC: 1400 },
       { model: "Honda Jazz", modelCC: 1600 },
+      { model: "i10", modelCC: 1720 },
+      { model: "i20", modelCC: 1630 },
+      { model: "Nano", modelCC: 1300 },
+      { model: "Tiago", modelCC: 1200 },
+      { model: "Climber", modelCC: 1100 },
+      { model: "Duster", modelCC: 1290 },
+
       { model: "Discover", modelCC: 120 },
       { model: "Platina", modelCC: 140 },
+      { model: "Splendor", modelCC: 110 },
       { model: "Pulsar", modelCC: 150 },
       { model: "Classic", modelCC: 130 },
-      { model: "Platinum", modelCC: 100 }
+      { model: "Platinum", modelCC: 100 },
+      { model: "FZ-X", modelCC: 100 },
     ];
     console.log(this.vehicleCC);
   }
@@ -84,7 +93,12 @@ export class PlanComponent implements OnInit {
     this.vehicleDetails.vehiclePlantype = Number(this.vehicleDetails.vehiclePlantype);
     this.vehicleDetails.vehicleType = Number(this.vehicleDetails.vehicleType);
     console.log(this.vehicleDetails);
-    //this.saveVehicle();
+    
+    sessionStorage.removeItem("vehicle");
+    sessionStorage.setItem("vehicle",JSON.stringify(this.vehicleDetails));
+    sessionStorage.setItem("paymentAmount",String(this.payment));
+    this.routes.navigate(['/payment']);
+    
 
   }
   calculatePremium(): void {

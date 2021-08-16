@@ -1,26 +1,26 @@
 <div>
-<div class="tableAlign">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <table class="table" border="1px">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Registration No</th>
-                            <th scope="col">Model</th>
-                            <th scope="col">Issue Date</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Active Status</th>
-                            <th scope="col">Renew Policy</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let insurance of allVehicleInsurances;">
+    <div class="tableAlign">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <table class="table" border="1px">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Registration No</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Issue Date</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Active Status</th>
+                                <th scope="col">Renew Policy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <tr *ngFor="let insurance of allVehicleInsurances;">
                             <ng-container *ngIf="insurance.insurancePolicytype === 1">
                                 <td>{{insurance.insuranceId}}</td>
                                 <ng-container *ngFor="let v of allVehicleList;">
-                                    <ng-container *ngIf="v.insurance === insurance.insuranceId && v != null">
+                                    <ng-container *ngIf="v != null && v.insurance === insurance.insuranceId ">
                                         <td>{{v.vehicleRegistrationno}}</td>
                                         <td>{{v.vehicleManufacture +" - "+ v.vehicleModel}}</td>
                                     </ng-container>
@@ -28,16 +28,30 @@
                                 <td>{{insurance.insuranceIssuedate}}</td>
                                 <td>{{insurance.insuranceAmount}}</td>
                                 <td>{{insurance.insuranceIsactive}}</td>
-                                <!-- <td><button class="btn btn-primary" (click)="open()">Vehicle Details</button></td> -->
+                                <td><button class="btn btn-primary" (click)="open()">Vehicle Details</button></td>
                                 <td><button id={{insurance.insuranceId}} class="btn btn-primary"
                                         [disabled]="insurance.insuranceIsactive===1" (click)="passVehicleDetailsToPlan($event)">Renew</button></td>
                             </ng-container>
-                        </tr>
-                    </tbody>
-                </table>
+                        </tr> -->
+                            <tr *ngFor="let vehicle of allVehicleList;">
+
+                                <td>{{vehicle.vehicleRegistrationno}}</td>
+                                <td>{{vehicle.vehicleManufacture +" - "+ vehicle.vehicleModel}}</td>
+                                <ng-container *ngFor="let insurance of allVehicleInsurances;">
+                                    <ng-container *ngIf="vehicle.insurance === insurance.insuranceId ">
+                                        <td>{{insurance.insuranceId}}</td>
+                                        <td>{{insurance.insuranceIssuedate}}</td>
+                                        <td>{{insurance.insuranceAmount}}</td>
+                                        <td>{{insurance.insuranceIsactive}}</td>
+                                        <td><button id={{insurance.insuranceId}} class="btn btn-primary"
+                                                [disabled]="insurance.insuranceIsactive===1"
+                                                (click)="passVehicleDetailsToPlan($event)">Renew</button></td>
+                                    </ng-container>
+                                </ng-container>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
