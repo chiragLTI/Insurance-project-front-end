@@ -1,4 +1,4 @@
 export class Payment {
-    paymentAmount:number;
+    paymentAmount:number=0;
     insurance:any={insuranceId:0};
 }

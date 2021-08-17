@@ -1,0 +1,238 @@
+<div class="first">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Travel Form</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <form #regForm=ngForm class="form-horizontal" (ngSubmit)="onSubmit()">
+
+                            <div class="form-group">
+                                <label for="Destination" class="cols-sm-2 control-label">Destination</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa"
+                                                aria-hidden="true"></i></span>
+                                        <div *ngIf="de.invalid && (de.dirty||de.touched)" style="color:red;">
+                                            <div *ngIf="de.errors?.required">Destination required</div>
+
+                                        </div>
+
+                                        <input type="text" class="form-control" name="source" id="source"
+                                            placeholder="Enter your Destination" required #de="ngModel" required
+                                            [(ngModel)]="travel.travelDestination" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="modeOftravel" class="cols-sm-2 control-label">Mode of Travel </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa"
+                                                aria-hidden="true"></i></span>
+                                        <div *ngIf="mo.invalid && (mo.dirty||mo.touched)" style="color:red;">
+                                            <div *ngIf="mo.errors?.required">Mode of travel required</div>
+
+                                        </div>
+                                        <input type="text" class="form-control" name="mode" id="mode"
+                                            placeholder="Enter Mode of Travel" required #mo="ngModel" required
+                                            [(ngModel)]="travel.travelModeoftravel" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="noOfTravellers" class="cols-sm-2 control-label">No of Travellers </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa"
+                                                aria-hidden="true"></i></span>
+                                        <div *ngIf="tr.invalid && (tr.dirty||mo.touched)" style="color:red;">
+                                            <div *ngIf="tr.errors?.required"> No. of travellers required</div>
+
+                                        </div>
+                                        <input type="number" min="0" class="form-control" name="travellers"
+                                            id="travellers" placeholder="Enter Number of Travellers" required
+                                            #tr="ngModel" required [(ngModel)]="travel.travelNoofmembers" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate" class="cols-sm-2 control-label">Destination Start Date </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa"
+                                                aria-hidden="true"></i></span>
+                                        <div *ngIf="sd.invalid && (sd.dirty||sd.touched)" style="color:red;">
+                                            <div *ngIf="sd.errors?.required">Start Date required</div>
+
+                                        </div>
+                                        <input type="date" class="form-control" name="startdate" id="startdate"
+                                            [(ngModel)]="travel.travelStartdate" #sd="ngModel" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate" class="cols-sm-2 control-label">Destination End Date </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa"
+                                                aria-hidden="true"></i></span>
+                                        <div *ngIf="ed.invalid && (ed.dirty||ed.touched)" style="color:red;">
+                                            <div *ngIf="ed.errors?.required">Start Date required</div>
+
+                                        </div>
+                                        <input type="date" class="form-control" name="startdate" id="enddate"
+                                            [(ngModel)]="travel.travelEnddate" #ed="ngModel" required />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="noOfTravellers" class="cols-sm-2 control-label">Policy plan </label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa"
+                                                aria-hidden="true"></i></span>
+                                        <div *ngIf="pp.invalid && (pp.dirty||pp.touched)" style="color:red;">
+                                            <div *ngIf="pp.errors?.required">Policy plan required</div>
+
+                                        </div>
+                                        <select class="form-select" name="policyplan" id="policyplan"
+                                            [(ngModel)]="travel.travelPolicyplan" #pp="ngModel"
+                                            aria-label="Default select example" required>
+
+                                            <option selected value=0>Standard</option>
+                                            <option value=1>Gold</option>
+
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="email" class="cols-sm-2 control-label">Traveller Email</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope fa"
+                                                        aria-hidden="true"></i></span>
+                                                <input type="email" class="form-control" name="email" id="email"
+                                                    #em="ngModel" placeholder="Enter email" required
+                                                    pattern="[a-z0-9._%+-]+@[a-z0-9-]+\.[a-z]{2,4}$"
+                                                    [(ngModel)]="travel.travelEmail"><br><br>
+                                                <div *ngIf="em.invalid && (em.dirty||em.touched)" style="color:red;">
+                                                    <div *ngIf="em.errors?.required">Email is required</div>
+                                                    <div *ngIf="em.errors?.pattern">enter proper email</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="cols-sm-2 control-label">Traveller contact</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa"
+                                                        aria-hidden="true"></i></span>
+                                                <div *ngIf="tc.invalid && (tc.dirty||tc.touched)" style="color:red;">
+                                                    <div *ngIf="tc.errors?.required">Travel Contact required</div>
+                                                    <div *ngIf="tc.errors?.maxlength">maximum 10 valurs</div>
+                                                </div>
+
+                                                <input type="text" class="form-control" name="tcontact" id="tcontact"
+                                                    placeholder="Enter your Contact Number" required maxlength="10"
+                                                    #tc="ngModel" placeholder="Enter user name" required
+                                                    [(ngModel)]="travel.travelContact" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="cols-sm-2 control-label">Nominee Name</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa"
+                                                        aria-hidden="true"></i></span>
+                                                <div *ngIf="nn.invalid && (nn.dirty||nn.touched)" style="color:red;">
+                                                    <div *ngIf="nn.errors?.required">Nominee Name required</div>
+
+                                                </div>
+
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                    placeholder="Enter your Name" required minlength="4" #nn="ngModel"
+                                                    placeholder="Enter user name" id="uname" required
+                                                    [(ngModel)]="travel.nomineeName" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="cols-sm-2 control-label">Nominee Relationship</label>
+                                        <div class="cols-sm-10">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-user fa"
+                                                        aria-hidden="true"></i></span>
+                                                <div *ngIf="nr.invalid && (nr.dirty||nr.touched)" style="color:red;">
+                                                    <div *ngIf="nr.errors?.required">Nominee Relationship required</div>
+                                                    <div *ngIf="nr.errors?.minlength">Minimum 4 chars</div>
+                                                </div>
+
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                    placeholder="Enter your Name" required minlength="4" #nr="ngModel"
+                                                    placeholder="Enter user name" id="uname" required
+                                                    [(ngModel)]="travel.nomineeRelationship" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+<!-- 
+                                    <div class="form-group">
+                                        <label for="name" class="cols-sm-2 control-label">Insurance Id</label>
+                                        <div class="cols-sm-10">
+
+                                            <select class="browser-default custom-select mb-4" [(ngModel)]="ins"
+                                                name="insuranceId">
+                                                <option value="" disabled>Choose option</option>
+                                                <option value=301 selected>301</option>
+                                                <option value=302>302</option>
+                                                <option value=303>303</option>
+                                                <option value=314>314</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name" class="cols-sm-2 control-label">Customer Id</label>
+                                        <div class="cols-sm-10">
+
+                                            <select class="browser-default custom-select mb-4" [(ngModel)]="cus"
+                                                name="customerId">
+                                                <option value="" disabled>Choose option</option>
+                                                <option value=101 selected>101</option>
+                                                <option value=102>102</option>
+                                                <option value=103>103</option>
+                                                <option value=104>104</option>
+                                            </select>
+                                        </div>
+                                    </div> -->
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group ">
+                                <button type="button" (click)="onSubmit()" [disabled]='regForm.invalid'
+                                    class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

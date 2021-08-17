@@ -1,0 +1,110 @@
+<div class="first">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Member Details Form</h4>
+                    </div>
+
+                     
+                    <button type="button" class="btn btn-primary mb-2" (click)="addMembers()">Add Member</button>
+                    <form #regForm=ngForm  class="form-horizontal" (ngSubmit)="onSubmit()">
+                    <div *ngFor="let mem of mem; let i = index;" class="card-body">
+
+                      
+                       
+                            <div class="form-group">
+                                <label for="Destination" class="cols-sm-2 control-label">Member Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                        <div *ngIf="mn.invalid && (mn.dirty||mn.touched)" style="color:red;">
+                                            <div *ngIf="mn.errors?.required">Member name required</div>
+                                            
+                                        </div>
+
+                                        <input type="text" class="form-control" name="source" id="source"
+                                            placeholder="Enter Member Name" required   #mn="ngModel"
+                                            required
+                                            [(ngModel)]='mem.memberName'
+                                            />
+                                        </div>
+                                    </div>    
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Destination" class="cols-sm-2 control-label">Member Dob</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                        <div *ngIf="md.invalid && (md.dirty||md.touched)" style="color:red;">
+                                            <div *ngIf="md.errors?.required">Member Dob required</div>
+                                            
+                                        </div>
+
+                                        <input type="date" class="form-control" name="memDob" id="memDob"
+                                            placeholder="Enter your Destination" required   #md="ngModel"
+                                            required
+                                            [(ngModel)]="mem.memberDob" />
+                                        </div>
+                                    </div>    
+                            </div>
+                            <div class="form-group">
+                                <label for="memrelationship" class="cols-sm-2 control-label">Member RelationShip</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                        <div *ngIf="mr.invalid && (mr.dirty||mr.touched)" style="color:red;">
+                                            <div *ngIf="mr.errors?.required">Member Relationship required</div>
+                                            
+                                        </div>
+
+                                        <input type="text" class="form-control" name="memRel" id="memRel"
+                                            placeholder="Enter Member Relationship" required   #mr="ngModel"
+                                            required
+                                            [(ngModel)]="mem.memberRelationship" />
+                                        </div>
+                                    </div>    
+                            </div>
+                            <div class="form-group">
+                                <label for="Destination" class="cols-sm-2 control-label">Member Passport No</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                        <div *ngIf="mp.invalid && (mp.dirty||mp.touched)" style="color:red;">
+                                            <div *ngIf="mp.errors?.required">Member Passport required</div>
+                                            
+                                        </div>
+
+                                        <input type="text" class="form-control" name="mamPass" id="mamPass"
+                                            placeholder="Enter Member Passport" required   #mp="ngModel"
+                                            required
+                                            [(ngModel)]="mem.memberPassportno" />
+                                        </div>
+                                    </div>    
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="name" class="cols-sm-2 control-label">Travel Id</label>
+                                <div class="cols-sm-10">
+                                   
+                                    <select class="browser-default custom-select mb-4" [(ngModel)]="mem.travel.travelid" name="travelId">
+                                      <option value="" disabled>Choose option</option>
+                                      <option value=451 selected>451</option>
+                                      <option value=85>85</option>
+                                      <option value=70>70</option>
+                                      <option value=454>454</option>
+                                      </select>
+                                </div>
+                            </div> -->
+                    </div>
+                    <div class="form-group ">
+                        <button type="button" (click)="onSubmit()" [disabled]='regForm.invalid'
+                            class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

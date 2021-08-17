@@ -1,0 +1,60 @@
+<!-- Default form contact -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<div class="container" style="border: 2px solid;margin-top: 10px;">
+    <div class="div1">
+        <form class="text-center border border-light p-5" #claimForm=ngForm (ngSubmit)="onSubmit()">
+
+            <p class="h4 mb-4">Claim Form</p>
+
+            <label>Your Insurances ID</label>
+            <select class="browser-default custom-select mb-4" [(ngModel)]="ins" name="insuranceId" required>
+                <option value="" disabled>Choose option</option>
+                <option value=301 selected>301</option>
+                <option value=303>303</option>
+
+            </select>
+
+
+            <input type="date" placeholder="Date" class="form-control mb-4" id="dateId"
+                [(ngModel)]="claim.claimDateofsubmission" name="dateOfSubmission" required>
+
+            <!-- Subject -->
+            <label>Reason of Claim</label>
+            <select required class="browser-default custom-select mb-4" [(ngModel)]="claim.claimReason" name="reason">
+                <option value="" disabled>Choose option</option>
+                <option value="Natural disasters like floods, cyclones, etc." selected>Natural disasters like floods,
+                    cyclones, etc.</option>
+                <option value="Damages arising due to a Car Accident.">Damages arising due to a Car Accident.</option>
+                <option
+                    value="An accident with any third-party which may lead to their bodily injury or property damage.">
+                    An accident with any third-party which may lead to their bodily injury or property damage.</option>
+                <option value="Theft of your car.">Theft of your car.</option>
+                <option value="An accidental fire which may happen in your car.">An accidental fire which may happen in
+                    your car.</option>
+            </select>
+
+
+
+            <!-- Message -->
+            <!-- <div class="form-group">
+      <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Message"></textarea>
+    </div> -->
+
+            <!-- Copy -->
+            <div class="row">
+                <div class="col-md-6 mx-auto d-flex justify-content-center">
+                    <!-- <mdb-checkbox [default]="true" class="mb-4">Send me a copy of this message</mdb-checkbox> -->
+                </div>
+            </div>
+            <!-- <input type="checkbox" id="SendDetails" name="Mail" value="Mail">
+    <label for="SendDetails">{{SendText}}</label> -->
+            <br>
+            <!-- Send button -->
+            <button type="submit" class="btn btn-primary btn-lg" (submit)="onSubmit()">Claim</button>
+
+        </form>
+    </div>
+</div>
+<!-- Default form contact -->

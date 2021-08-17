@@ -30,7 +30,11 @@ a{
     padding: 16px;
     font-family: Arial, Helvetica, sans-serif;
 }
-
+img{
+    margin-left: 20px;
+    width: 200px;
+    height: 200px;
+}
 p{
     font-size: 20px;
 }

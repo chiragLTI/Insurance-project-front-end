@@ -21,6 +21,10 @@ import { PaymentComponent } from './payment/payment.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarOnLoginComponent } from './navbar-on-login/navbar-on-login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { TravelFromComponent } from './travel-from/travel-from.component';
+import { MemberComponentComponent } from './member-component/member-component.component';
+import { ClaimComponent } from './claim/claim.component';
+import { ClaimViewComponent } from './claim-view/claim-view.component';
 
 
 @NgModule({
@@ -41,6 +45,10 @@ import { LogoutComponent } from './logout/logout.component';
     NavbarComponent,
     NavbarOnLoginComponent,
     LogoutComponent,
+    TravelFromComponent,
+    MemberComponentComponent,
+    ClaimComponent,
+    ClaimViewComponent,
   ],
   imports: [
     BrowserModule,

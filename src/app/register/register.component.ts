@@ -41,13 +41,10 @@ export class RegisterComponent implements OnInit {
 
       console.log(JSON.stringify(this.msg));
        this.final_msg=JSON.stringify(this.msg);
-       this.final_msg1=this.final_msg.slice(20,45);
+       this.errorMessage="please fill all the details";
 
+       this._router.navigate(['/home']);
        
-       if(this.final_msg1=="Registeration successfull"){
-        this._router.navigate(['/login']);
-      
-       }
       
        //console.log(Object.keys(this.final_msg)[2]);
       
@@ -62,7 +59,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(){
     console.log(this.customer);
-    
+    alert("Registration Successful")
     this.saveCustomer();
   }
 

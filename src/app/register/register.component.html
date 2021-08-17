@@ -5,11 +5,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Customer Registeration</h4>
-                        <h5>{{final_msg1}}</h5>
+                        <h6 style="color: red;">{{errorMessage}}</h6>
                     </div>
                     <div class="card-body">
 
-                        <form #regForm=ngForm (ngSubmit)="onSubmit()"  class="form-horizontal">
+                        <form #regForm=ngForm (ngSubmit)="regForm.valid"  class="form-horizontal">
 
                             <div class="form-group">
                                 <label for="fname" class="cols-sm-2 control-label">First Name</label>
@@ -17,7 +17,7 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user fa"
                                                 aria-hidden="true"></i></span>
-                                        <div *ngIf="un.invalid && (un.dirty||un.touched)" style="color:red;">
+                                        <div *ngIf="regForm.submitted && un.invalid && (un.dirty||un.touched)" style="color:red;">
                                             <div *ngIf="un.errors?.required">First Name required</div>
                                             <div *ngIf="un.errors?.minlength">Minimum 4 chars</div>
                                         </div>
@@ -65,7 +65,7 @@
                                         </div>
 
                                         <input type="text" class="form-control" name="custContactnumber" id="name"
-                                            placeholder="Enter your Name" required minlength="4" #mb="ngModel"
+                                            placeholder="Enter your Name" required minlength="10" maxlength="10" #mb="ngModel"
                                             placeholder="Enter user name" id="uname" required
                                             [(ngModel)]="customer.custContactnumber" />
                                     </div>
@@ -117,9 +117,7 @@
                                 <button type="button"  (click)="onSubmit()"
                                     class="btn btn-primary btn-lg btn-block login-button"   >Register</button>
                             </div>
-                            <div class="login-register">
-                                <a href="index.php">Login</a>
-                            </div>
+                           
                         </form>
                     </div>
 

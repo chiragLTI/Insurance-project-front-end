@@ -12,6 +12,10 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { RegisterComponent } from './register/register.component';
 import { PaymentComponent } from './payment/payment.component';
 import { LogoutComponent } from './logout/logout.component';
+import { TravelFromComponent } from './travel-from/travel-from.component';
+import { MemberComponentComponent } from './member-component/member-component.component';
+import { ClaimViewComponent } from './claim-view/claim-view.component';
+import { ClaimComponent } from './claim/claim.component';
 
 const routes: Routes = [
   {
@@ -21,6 +25,14 @@ const routes: Routes = [
   {
     path: 'vehicleDetail',
     component: VehicleDetailsComponent
+  },
+  {
+    path: 'travelDetail',
+    component: TravelFromComponent
+  },
+  {
+    path: 'member',
+    component: MemberComponentComponent 
   },
   {
     path: 'home',
@@ -63,6 +75,14 @@ const routes: Routes = [
   {
     path: 'payment',
     component: PaymentComponent,
+  },
+  {
+    path: 'claimView',
+    component: ClaimViewComponent,
+  },
+  {
+    path: 'claim',
+    component: ClaimComponent,
   },
   {
     path: 'logout',

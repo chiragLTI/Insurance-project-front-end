@@ -4,9 +4,9 @@
                         <div class="col-md-5">
                             <div class="card">
                                 <div class="card-header"><h4>Member Login</h4></div>
-                                <h5>{{msg}}</h5>
+                                
                                 <div class="card-body">
-    
+                                    <div style="color: red;">{{errorMessage}}</div>
                                     <form #logForm=ngForm class="form-horizontal" (ngSubmit)="onSubmit(logForm)" method="post" action="#">
     
                                         <div class="form-group">

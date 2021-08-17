@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   msg = 0;
   final_msg = '';
   final_msg1 = '';
-  errorMessage = '';
+  errorMessage:string='';
   accessingPageId: number;
   constructor(private customerService: CustomerService, private _router: Router) {
     this.accessingPageId = this._router.getCurrentNavigation().extras.state.id;
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
             this._router.navigate(['/vehicleDetail']);
           }
           else if (this.accessingPageId === 2) {
-            this._router.navigate(['/renew']);
+            this._router.navigate(['/travelDetail']);
           }
           else if (this.accessingPageId === 3) {
             this._router.navigate(['/renew']);
@@ -58,6 +58,9 @@ export class LoginComponent implements OnInit {
             console.log("bad credentials");
             this._router.navigate(['/home']);
           }
+        }
+        else{
+          this.errorMessage = "bad credentials";
         }
       },
       error => {

@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
     if(sessionStorage.getItem("customerId") === null){
       console.log("redirect to login");
       //this.router.navigate(['/login']);
-      this.user = { id:2 };
+      this.user = { id:4 };
       this.router.navigateByUrl('/login', { state: this.user });
     }
     else{
@@ -51,18 +51,18 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl('/login', { state: this.user });
     }
     else{
-      console.log("redirect to claim insurance");
+      this.router.navigate(['/claimView']);
     }
   }
 
-  calculateInsurance():void{
+  buyTravelInsurance():void{
     if(sessionStorage.getItem("customerId") === null){
       //console.log("redirect to login");
-      this.user = { id:4 };
+      this.user = { id:2 };
       this.router.navigateByUrl('/login', { state: this.user });
     }
     else{
-      console.log("redirect to calculate insurance");
+      this.router.navigate(['/travelDetail']);
     }
   }
 

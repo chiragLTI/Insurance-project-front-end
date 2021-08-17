@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Insurance } from '../Models/insurance';
+import { Member } from '../Models/member';
 import { Payment } from '../Models/payment';
+import { Travel } from '../Models/travel';
 import { Vehicle } from '../Models/vehicle';
 import { InsuranceService } from '../Services/insurance.service';
+import { MemberService } from '../Services/member.service';
 import { PaymentService } from '../Services/payment.service';
+import { TravelService } from '../Services/travel.service';
 import { VehicleService } from '../Services/vehicle.service';
 
 
@@ -16,11 +21,18 @@ import { VehicleService } from '../Services/vehicle.service';
 export class PaymentComponent implements OnInit {
   value: boolean = true;
   cardnum: String = "";
-
-
   ins: number;
+  member: Member[]=[{
+    memberDob:null,
+    memberName:'',
+    memberPassportno :'',
+    memberRelationship:'', 
+    travel:{travelid:0}
+  }
+  ]
 
   payment: Payment = new Payment();
+  travel: Travel = new Travel();
   insurance: Insurance = new Insurance();
   insuranceToBeInserted: Insurance = new Insurance();
   vehicleDetails: Vehicle = new Vehicle();
@@ -28,7 +40,7 @@ export class PaymentComponent implements OnInit {
     console.log(JSON.parse(sessionStorage.getItem("vehicle")));
   }
 
-  constructor(private insuranceService: InsuranceService, private paymentService: PaymentService, private vehicleService: VehicleService) {
+  constructor(private router:Router,private memberService:MemberService,private travelService: TravelService, private insuranceService: InsuranceService, private paymentService: PaymentService, private vehicleService: VehicleService) {
     this.payment.paymentAmount = Number(sessionStorage.getItem("paymentAmount"));
   }
 
@@ -56,11 +68,13 @@ export class PaymentComponent implements OnInit {
 
     this.vehicleDetails = JSON.parse(sessionStorage.getItem("vehicle"));
     this.vehicleDetails.insurance = { insuranceId: generatedInsuranceId };
-    this.vehicleDetails.customer = { custId: Number(sessionStorage.getItem("customerId"))};
+    this.vehicleDetails.customer = { custId: Number(sessionStorage.getItem("customerId")) };
     console.log("updation till here");
     this.vehicleService.updateVehicleService(this.vehicleDetails).subscribe(data => {
       console.log(data);
       console.log("Vehicle Updation success");
+     
+      
     },
       error => {
         console.log(error.error.text);
@@ -68,7 +82,7 @@ export class PaymentComponent implements OnInit {
       }
     );
 
-    // this.savePayment(generatedInsuranceId);
+    this.savePayment(generatedInsuranceId);
   }
 
   savePayment(generatedInsuranceId: number) {
@@ -80,6 +94,9 @@ export class PaymentComponent implements OnInit {
       error => console.log(error));
 
     console.log("Vehicle Insurance Bought Successfully");
+    sessionStorage.removeItem("renewInsuranceDetails");
+    alert("Payment Successful");
+    this.router.navigate(['/home']);
   }
 
   check() {
@@ -87,6 +104,35 @@ export class PaymentComponent implements OnInit {
       this.value = true;
     }
   }
+
+  saveMember(travelId:number) {
+    this.member = JSON.parse(sessionStorage.getItem("memberDetails"));
+    console.log(this.member);
+    for (let index = 0; index < this.member.length; index++) {
+      this.member[index]['travel'].travelid = travelId;
+    }
+    console.log(this.member);
+    this.memberService.InsertMemberService(this.member).subscribe(data => {
+      console.log(data);
+    },
+      error => console.log(error));
+  }
+
+
+  saveTravel(insId: number) {
+    this.travel = JSON.parse(sessionStorage.getItem("travelDetails"));
+    this.travel.insurance = { insuranceId: insId };
+    this.travel.customer = { custId: sessionStorage.getItem("customerId") };
+    this.travel.travelPolicyplan = Number(this.travel.travelPolicyplan);
+    this.travelService.InsertTravelService(this.travel).subscribe(data => {
+      console.log(data);
+      this.saveMember(data.travelid);
+    },
+      error => console.log(error));
+
+
+  }
+
 
 
   onSubmit() {
@@ -103,6 +149,7 @@ export class PaymentComponent implements OnInit {
     if (sessionStorage.getItem("renewInsuranceDetails") != null) {
       this.insuranceToBeInserted = JSON.parse(sessionStorage.getItem("renewInsuranceDetails"));
       this.insuranceToBeInserted.insuranceAmount = this.payment.paymentAmount;
+      this.insuranceToBeInserted.insuranceIssuedate = new Date();
       this.insuranceService.insertInsurance(this.insuranceToBeInserted).subscribe(data => {
         console.log("inside data");
         console.log(data.insuranceId);
@@ -116,6 +163,23 @@ export class PaymentComponent implements OnInit {
         }
       );
 
+    }
+    else if (sessionStorage.getItem("policyType") == "2") {
+      this.insurance.insuranceAmount = 3000;
+      console.log(JSON.parse(sessionStorage.getItem("travelDetails")));
+      console.log(JSON.parse(sessionStorage.getItem("memberDetails")));
+     
+      this.insuranceService.insertInsurance(this.insurance).subscribe(data => {
+        console.log("inside travel insurance generation");
+        console.log(data.insuranceId);
+        this.saveTravel(data.insuranceId);
+      },
+        error => {
+          console.log("inside payment error");
+          console.log(error.error.text);
+
+        }
+      );
     }
     else {
       this.insuranceToBeInserted = this.insurance;
